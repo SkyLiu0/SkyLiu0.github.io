@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissor</title>
+</head>
+<body>
+    <h1>A rock-paper-scissor game you may always win.</h1>
+    <h2>Mode</h2>
+    <select name="mode" id="mode">
+        <option value="random" selected>I want a fair game to beat Sky!</option>
+        <option value="easy">I just want to kick Sky's ass!</option>
+    </select>
+    <h2>Play</h2>
+    <div>Round <span id="round">0</span></div>
+    <p>Sky's action: <span id="sky_act"></span></p>
+    <p>Your action: <span id="your_act"></span></p>
+    <button type="button" value="0" onclick="play_rps(this)">Rock</button>
+    <button type="button" value="1" onclick="play_rps(this)">Paper</button>
+    <button type="button" value="2" onclick="play_rps(this)">Scissor</button>
+    <h2>Result</h2>
+    <h3>This round</h3>
+    <p id="result">Have a try~</p>
+    <h3>Statistics</h3>
+    <table border="1">
+        <thead>
+            <th>Win</th>
+            <th>Lose</th>
+            <th>Tie</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="wins">0</td>
+                <td id="loses">0</td>
+                <td id="ties">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="reset_game()">Reset the game.</button>
+
+    <script>
+        var round = 0;
+        var win = 0;
+        var lose = 0;
+        var tie = 0;
+        var acts = ['Rock', 'Paper', 'Scissor'];
+
+        function generate_sky_action(mode, your_action){
+            var sky_action;
+            if (mode === 'easy'){
+                sky_action = (your_action-1) % 3;
+            } else if (mode === 'random'){
+                sky_action = Math.floor(Math.random() * 3);
+            }
+
+            document.getElementById('sky_act').innerHTML = acts[sky_action];
+
+            return sky_action;
+        }
+
+        function generate_result(your_action, sky_action){
+            if (your_action - sky_action === 0){
+                document.getElementById('ties').innerHTML = ++tie;
+                document.getElementById('result').innerHTML = 'Tie~';
+            } else if ((your_action - sky_action)%3 === 1){
+                document.getElementById('wins').innerHTML = ++win;
+                document.getElementById('result').innerHTML = 'You win~';
+            } else {
+                document.getElementById('loses').innerHTML = ++lose;
+                document.getElementById('result').innerHTML = 'You lose~';
+            }
+        }
+
+        function play_rps(btn){
+            document.getElementById('round').innerHTML = ++round;
+            var mode = document.getElementById('mode').value;
+            var your_action = btn.value;
+            document.getElementById('your_act').innerHTML = acts[your_action];
+            var sky_action = generate_sky_action(mode, your_action);
+            var result = generate_result(your_action, sky_action);
+        }
+
+        function reset_game(){
+            mode = 0;
+            win = 0;
+            lose = 0;
+            tie = 0;
+
+            document.getElementById('mode').options[0].selected = true;
+
+            document.getElementById('round').innerHTML = 0;
+            document.getElementById('sky_act').innerHTML = '';
+            document.getElementById('your_act').innerHTML = '';
+            
+            document.getElementById('result').innerHTML = 'Have a try~';
+            
+            document.getElementById('wins').innerHTML = win;
+            document.getElementById('loses').innerHTML = lose;
+            document.getElementById('ties').innerHTML = tie;
+
+            alert('Successfully reset!');
+        }
+    </script>
+</body>
+</html>
