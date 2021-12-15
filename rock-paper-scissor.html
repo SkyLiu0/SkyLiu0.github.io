@@ -51,7 +51,7 @@
         function generate_sky_action(mode, your_action){
             var sky_action;
             if (mode === 'easy'){
-                sky_action = (your_action-1) % 3;
+                sky_action = (your_action+2) % 3;
             } else if (mode === 'random'){
                 sky_action = Math.floor(Math.random() * 3);
             }
