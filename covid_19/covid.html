@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID 19</title>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/echarts.min.js"></script>
+
+    <style>
+        table{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-time situation of COVID-19</h1>
+    <script>
+        
+    </script>
+    <h2>Time</h2>
+    <div id="showtime"></div>
+    <h2>Situation</h2>
+    <h3>Singapore</h3>
+    <table id="singapore" border="1">
+        <thead>
+            <th>现有确诊（较上日）</th>
+            <th>累计确诊（较上日）</th>
+            <th>累计治愈（较上日）</th>
+            <th>累计死亡（较上日）</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var now = function(){
+            var d = new Date();
+            var year = d.getFullYear(), //多变量赋值
+                month = d.getMonth() + 1, //month：从0开始
+                date = d.getDate(),
+                hour = d.getHours(),
+                minute = d.getMinutes(),
+                second = d.getSeconds();
+
+            month = month < 10 ? '0' + month : month;
+            date = date < 10 ? '0' + date : date;
+            hour = hour < 10 ? '0' + hour : hour;
+            minute = minute < 10 ? '0' + minute : minute;
+            second = second < 10 ? '0' + second : second;
+            var time_string = year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
+            $('#showtime').html(time_string); //显示时间
+        }
+
+        now();
+        setInterval(now, 1000);
+
+        function sign_number(x){
+            return (x>=0? '+' : '') + x;
+        }
+
+        var ajax_covid = function(){
+            $.ajax({
+                url: 'https://api.inews.qq.com/newsqa/v1/automation/modules/list?modules=WomAboard',
+                type: 'post',
+                dataType: 'json',
+                success: function(data){
+                    console.log('successfully get covid data');
+                    var res = data.data.WomAboard;
+                    for(var i in res){
+                        if (res[i].name === "新加坡")
+                        break;
+                    }
+                    console.log(res[i]);
+
+                    var table_sing = document.getElementById('singapore');
+                    var td_sing = table_sing.getElementsByTagName('td');
+                    td_sing[0].innerHTML = res[i].nowConfirm + '(' + sign_number(res[i].nowConfirmCompare) + ')';
+                    td_sing[1].innerHTML = res[i].confirm + '(' + sign_number(res[i].confirmAdd) + ')';
+                    td_sing[2].innerHTML = res[i].heal + '(' + sign_number(res[i].healCompare) + ')';
+                    td_sing[3].innerHTML = res[i].dead + '(' + sign_number(res[i].deadCompare) + ')';
+                    
+                },
+                error: function(e){
+                    console.log('fail to get covid data');
+                    console.log(e);
+                }
+            })
+        }
+
+        ajax_covid();
+        setInterval(ajax_covid, 360000);
+    </script>
+</body>
+</html>
