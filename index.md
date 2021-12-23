@@ -14,3 +14,6 @@
 
 ### COVID-19
 [Real-time situation of COVID-19](./covid_19/covid.html)
+
+### Postcards
+[Postcard](./postcards/postcard.html)
