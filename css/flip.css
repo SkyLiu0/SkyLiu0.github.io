@@ -21,6 +21,7 @@
 	-webkit-transform-style: preserve-3d;
 
 	position: relative;
+	overflow:hidden
 }
 
 /* hide back of pane during swap */
