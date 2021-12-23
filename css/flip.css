@@ -1,7 +1,8 @@
 /* entire container, keeps perspective */
-.flip-container {
+/* .flip-container {
 	perspective: 1000;
-}
+	-webkit-perspective: 1000;
+} */
 
 /* flip the pane when hovered */
 .flip-container:hover .flipper, .flip-container.hover .flipper {
@@ -44,7 +45,7 @@
 	transform: rotateY(180deg);
 }
 
-img {
+.front img, .back img {
     width: 100%;
     /* width: auto; */
 }
