@@ -7,20 +7,36 @@
     <title>Postcards</title>
 
     <link rel="stylesheet" href="../css/flip.css">
+    <link rel="stylesheet" href="../css/snow.css">
+    <script src="js/jquery.js"></script>
+
+    <style>
+        body {
+            height: 100vh;
+            background-color: rgb(167, 193, 216);
+            background-image: -webkit-linear-gradient(top, rgb(167, 193, 216), rgb(95, 95, 131));
+        }
+    </style>
 </head>
 <body>
-    <h2>Merry Christmas</h2>
+    <h2>Happy new year!</h2>
+    <p>送你冬天的雪。</p>
+    <div id="snowflakeContainer">
+        <span class="snowflake"></span>
+    </div>
     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
         <div class="flipper">
             <div class="front">
                 <!-- 前面内容 -->
-                <img src="../imgs/postcards/christmas21_front.png" alt="merry Christmas 2021">
+                <img src="../imgs/postcards/new_year_2022_front.png" alt="happy new year 2022">
             </div>
             <div class="back">
                 <!-- 背面内容 -->
-                <img src="../imgs/postcards/christmas21_back.png" alt="merry Christmas 2021">
+                <img src="../imgs/postcards/new_year_2022_back.jpg" alt="happy new year 2022">
             </div>
         </div>
     </div>
+
+    <script src="../js/snow.js"></script>
 </body>
 </html>
