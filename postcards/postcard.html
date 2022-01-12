@@ -16,11 +16,24 @@
             background-color: rgb(167, 193, 216);
             background-image: -webkit-linear-gradient(top, rgb(167, 193, 216), rgb(95, 95, 131));
         }
+
+        #count {
+            float: right;
+            margin-top: auto;
+            color: antiquewhite;
+        }
+
+        .greetings {
+            color: rgb(33, 65, 124);
+        }
     </style>
 </head>
 <body>
-    <h2>Happy new year!</h2>
-    <p>送你冬天的雪。</p>
+    <div id="count"></div>
+    <div class="greetings">
+        <h2>Happy new year!</h2>
+        <p>送你冬天的雪。</p>
+    </div>
     <div id="snowflakeContainer">
         <span class="snowflake"></span>
     </div>
@@ -38,5 +51,12 @@
     </div>
 
     <script src="../js/snow.js"></script>
+    <script>
+        var now = new Date();
+        var start = new Date(2019, 8-1, 18);
+        
+        var days = Math.floor((Date.parse(now) - Date.parse(start)) / 86400000);
+        document.getElementById("count").innerHTML = days;
+    </script>
 </body>
 </html>
