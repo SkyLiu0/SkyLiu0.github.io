@@ -3,6 +3,11 @@
 	perspective: 1000;
 	-webkit-perspective: 1000;
 } */
+.flip-container {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+}
 
 /* flip the pane when hovered */
 @media(hover : hover){
@@ -15,7 +20,7 @@
 }
 
 .flip-container, .front, .back {
-	width: 800px;
+	width: 500px;
 	/* width: 480px; */
 	height: auto;
 }
